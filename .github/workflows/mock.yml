@@ -1,0 +1,15 @@
+name: "Mock"
+
+on:
+  pull_request:
+
+jobs:
+  mock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            mock: &mock
+              - "apps/mock/*"
