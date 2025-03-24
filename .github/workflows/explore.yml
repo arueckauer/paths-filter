@@ -15,8 +15,12 @@ jobs:
         with:
           filters: |
             php: &php
-              - "**/*.php"
-              - "**/*.php.dist"
+              - "backend/**/*.php"
+              - "bin/**/*.php"
+              - "config/**/*.php"
+              - "config/**/*.php.dist"
+              - "public/**/*.php"
+              - "test/**/*.php"
             workflow: &workflow
               - .github/workflows/explore.yml
             phpcs: &phpcs
