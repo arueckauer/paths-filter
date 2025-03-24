@@ -20,6 +20,7 @@ jobs:
               - "test/**/*.php"
             workflow: &workflow
               - .github/workflows/explore.yml
+              - .github/workflows/mock.yml
             phpcs: &phpcs
               - *php
               - *workflow
