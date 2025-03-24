@@ -1,0 +1,46 @@
+name: "Explore"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  explore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            php: &php
+              - "**/*.php"
+              - "**/*.php.dist"
+            workflow: &workflow
+              - .github/workflows/explore.yml
+            phpcs: &phpcs
+              - *php
+              - *workflow
+              - phpcs.xml.dist
+            phpunit: &phpunit
+              - *php
+              - *workflow
+              - phpunit.xml.dist
+            psalm: &psalm
+              - *php
+              - *workflow
+              - psalm.xml
+              - psalm-baseline.xml
+            rector: &rector
+              - *php
+              - *workflow
+              - rector.php
+            mock: &mock
+              - "apps/mock/*"
+            any:
+              - *phpcs
+              - *phpunit
+              - *psalm
+              - *rector
+              - *mock
